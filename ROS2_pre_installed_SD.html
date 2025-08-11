@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!-- saved from url=(0187)file:///C:/Users/conne/Downloads/ROS_SD%EC%B9%B4%EB%93%9C_%EB%A7%88%EC%BC%80%ED%8C%85/ROS2%20Humble%20+%20Ubuntu%2022.04%20%EC%82%AC%EC%A0%84%EC%84%A4%EC%B9%98%20SD%EC%B9%B4%EB%93%9C.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROS2 Humble + Ubuntu 22.04 사전설치 SD카드 - 라즈베리파이 4 전용</title>
+    <link href="./ROS2_pre_installed_SD_files/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./ROS2_pre_installed_SD_files/all.min.css">
+    <link href="./ROS2_pre_installed_SD_files/css2" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        /*.hero-section {
+            
+            background-image: url('robotarm_rviz_2.jpg');
+            background-size: cover;
+            background-position: center;
+           
+        }*/
+
+        .hero-section {
+            /* 배경 이미지를 원하는 이미지 URL로 변경합니다. */
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),url('./robotarm_rviz_2.png');
+            background-size: cover; /* 이미지가 섹션을 꽉 채우도록 설정 */
+            background-position: center; /* 이미지를 중앙에 위치 */
+            /* 다른 배경 속성들을 여기에 추가할 수 있습니다. */
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .price-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .countdown-timer {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 40px 0;
+            }
+        }
+    </style>
+<style>
+    .genspark-notice-dialog {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10001;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .genspark-notice-content {
+      background-color: white;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      box-sizing: border-box;
+      padding: 10px 30px 30px 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+    }
+
+    .genspark-notice-title {
+      color: #000;
+      font-family: Arial;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+    }
+
+    .genspark-notice-list {
+      margin: 24px 0;
+      
+      color: #606366;
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      padding-left: 12px;
+    }
+
+    .genspark-notice-list li {
+      margin-bottom: 12px;
+      list-style-type: disc;
+    }
+
+    .genspark-notice-list li a {
+      color: #606366;
+      text-decoration: underline;
+    }
+
+    .genspark-notice-checkbox {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      gap: 10px;
+
+      color: #232425;
+
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .genspark-notice-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+      
+    .genspark-notice-ok {
+      color: #232425;
+
+      text-align: center;
+      font-family: Arial;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+
+      cursor: pointer;
+      display: flex;
+      height: 40px;
+      padding: 6px 14px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 8px;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      width: 100%;
+    }
+  </style><style>
+    .genspark-notice-dialog {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10001;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .genspark-notice-content {
+      background-color: white;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      box-sizing: border-box;
+      padding: 10px 30px 30px 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+    }
+
+    .genspark-notice-title {
+      color: #000;
+      font-family: Arial;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+    }
+
+    .genspark-notice-list {
+      margin: 24px 0;
+      
+      color: #606366;
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      padding-left: 12px;
+    }
+
+    .genspark-notice-list li {
+      margin-bottom: 12px;
+      list-style-type: disc;
+    }
+
+    .genspark-notice-list li a {
+      color: #606366;
+      text-decoration: underline;
+    }
+
+    .genspark-notice-checkbox {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      gap: 10px;
+
+      color: #232425;
+
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .genspark-notice-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+      
+    .genspark-notice-ok {
+      color: #232425;
+
+      text-align: center;
+      font-family: Arial;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+
+      cursor: pointer;
+      display: flex;
+      height: 40px;
+      padding: 6px 14px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 8px;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      width: 100%;
+    }
+  </style></head>
+<body class="bg-gray-50">
+    <!-- Hero Section with Background Image -->
+    <section class="hero-section">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-6xl md:text-8xl font-black text-white mb-8 leading-tight">
+                    <span class="text-3xl md:text-5xl font-normal">🚀 5분 만에 시작하는<br></span>
+                    <span class="gradient-text">ROS2 Ubuntu 사전설치 SD카드 판매!</span>
+                </h1>
+                <p class="text-2xl md:text-3xl text-gray-200 mb-8 font-medium">
+                    복잡한 설치는 이제 그만, SD카드 하나로 끝내는 완벽한 ROS2 학습 환경
+                </p>
+               <div class="flex flex-wrap justify-center gap-6 mb-12 text-xl">
+                    <div class="flex items-center text-green-400">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Ubuntu + ROS2 완벽 사전 구성
+                    </div>
+                    <div class="flex items-center text-green-400">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        실습용 로봇암 ROS2 패키지 + 자율주행차 ROS2 패키지 포함
+                    </div>
+                    <div class="flex items-center text-green-400">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        라즈베리파이 4 전용 최적화
+                    </div>
+                </div>
+                
+                <!--<div class="countdown-timer text-white p-6 rounded-xl mb-8 inline-block">
+                    <div class="text-lg mb-2">⚡ 한정수량 특가! 남은 시간:</div>
+                    <div id="countdown" class="text-3xl font-bold">08:21:19</div>
+                    <div class="text-sm mt-2">선착순 100명, 로봇암 제어 키트 무료 증정!</div>
+                </div>-->
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/page/toolu_01Y4DTciAJPsgLD8VR68iAs6/ros2_sd_card_hero_bg_updated.html#pricing" class="bg-red-600 hover:bg-red-700 text-white text-xl px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        🛒 지금 주문하기 (최대 40% 할인)
+                    </a>
+                    <a href="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/page/toolu_01Y4DTciAJPsgLD8VR68iAs6/ros2_sd_card_hero_bg_updated.html#features" class="bg-white hover:bg-gray-100 text-gray-800 text-xl px-8 py-4 rounded-full font-bold transition-all duration-300 border-2 border-gray-300" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                        📖 자세히 알아보기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section-padding bg-red-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-12">😫 이런 경험 있으시죠?</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="text-4xl mb-4">😤</div>
+                    <h3 class="text-lg font-bold text-red-600 mb-2">ROS2 설치 지옥</h3>
+                    <p class="text-gray-600">설치하다가 하루 종일 삽질...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="text-4xl mb-4">💥</div>
+                    <h3 class="text-lg font-bold text-red-600 mb-2">듀얼부팅 실패</h3>
+                    <p class="text-gray-600">듀얼부팅 했다가 윈도우 날아감...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="text-4xl mb-4">🐌</div>
+                    <h3 class="text-lg font-bold text-red-600 mb-2">가상머신 느림</h3>
+                    <p class="text-gray-600">가상머신은 너무 느려서 답답함...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="text-4xl mb-4">🔌</div>
+                    <h3 class="text-lg font-bold text-red-600 mb-2">하드웨어 연결 실패</h3>
+                    <p class="text-gray-600">하드웨어 연결도 제대로 안됨...</p>
+                </div>
+            </div>
+            <div class="mt-12">
+                <h3 class="text-3xl font-bold text-green-600 mb-4">✨ 이제 모든 문제가 해결됩니다!</h3>
+                <p class="text-xl text-gray-700">ROS2 우분투 사전설치 SD카드 하나로 모든 고민 끝!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Process Section -->
+    <section id="features" class="section-padding bg-white" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">🎓 초보자용 ROS2 패키지 및 학습 과정 제공</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">ROS2가 사전 설치되어 있고  초보자를 위한  단계별 실습 과정 ROS2 패키지를  같이 제공합니다.</p>
+            </div>
+
+            <!-- OpenCV Process -->
+            <div class="mb-20">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2">
+                        <div class="bg-blue-50 p-8 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-blue-600 mb-4">📹 2-1. ROS2 OpenCV 카메라 영상 Publisher/subscriber</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
+                                    <div>
+                                        <h4 class="font-semibold">카메라 영상 퍼블리셔 노드 생성</h4>
+                                        <p class="text-gray-600 text-sm">OpenCV로 카메라에서 영상을 받아와 ROS2 토픽으로 퍼블리싱</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
+                                    <div>
+                                        <h4 class="font-semibold">영상 서브스크라이버 노드 생성</h4>
+                                        <p class="text-gray-600 text-sm">토픽에서 영상 데이터를 받아와 화면에 표시</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</div>
+                                    <div>
+                                        <h4 class="font-semibold">실시간 영상 처리</h4>
+                                        <p class="text-gray-600 text-sm">OpenCV 필터를 적용하여 실시간 영상 처리 학습</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <img src="./ROS2_pre_installed_SD_files/ros2_opencv_pub_sub.png" alt="ROS2 로봇팔 시뮬레이션 화면" class="w-full rounded-xl shadow-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-Wheel Robot -->
+            <div class="mb-20">
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <div class="lg:w-1/2">
+                        <div class="bg-green-50 p-8 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-green-600 mb-4">🚗 2-2. ROS2 2바퀴로봇 시각화 및 제어노드</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
+                                    <div>
+                                        <h4 class="font-semibold">rViz 로봇 시각화</h4>
+                                        <p class="text-gray-600 text-sm">2바퀴 로봇 모델을 rViz에서 3D 시각화</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
+                                    <div>
+                                        <h4 class="font-semibold">Twist 메시지로 제어</h4>
+                                        <p class="text-gray-600 text-sm">키보드 입력을 Twist 메시지로 변환하여 로봇 제어</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</div>
+                                    <div>
+                                        <h4 class="font-semibold">실제 하드웨어 연동</h4>
+                                        <p class="text-gray-600 text-sm">아두이노 기반 2바퀴 로봇 키트와 연동 제어</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <img src="./ROS2_pre_installed_SD_files/2wheel_robot_rviz.png" alt="ROS2 로봇팔 시뮬레이션 화면" class="w-full rounded-xl shadow-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Robot Arm -->
+            <div class="mb-20">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2">
+                        <div class="bg-purple-50 p-8 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-purple-600 mb-4">🦾 2-3. ROS2 5축로봇암 시각화 및 제어노드</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
+                                    <div>
+                                        <h4 class="font-semibold">Joint State Publisher 제어</h4>
+                                        <p class="text-gray-600 text-sm">각 관절의 위치를 슬라이더로 실시간 제어</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
+                                    <div>
+                                        <h4 class="font-semibold">rViz 3D 시각화</h4>
+                                        <p class="text-gray-600 text-sm">5축 로봇암의 실시간 3D 모델 시뮬레이션</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</div>
+                                    <div>
+                                        <h4 class="font-semibold">실제 로봇암 제어</h4>
+                                        <p class="text-gray-600 text-sm">초소형 5축 로봇암 키트를 ROS2로 제어</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <img src="./ROS2_pre_installed_SD_files/robotarm_rviz_1.png" alt="ROS2 로봇팔 시뮬레이션 화면" class="w-full rounded-xl shadow-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLAM Navigation -->
+            <div class="mb-20">
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <div class="lg:w-1/2">
+                        <div class="bg-orange-50 p-8 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-orange-600 mb-4">🗺️ 2-4. ROS2 자율주행로봇 SLAM 자율주행</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
+                                    <div>
+                                        <h4 class="font-semibold">라이다 센서 SLAM</h4>
+                                        <p class="text-gray-600 text-sm">라이다로 실시간 환경 스캔 및 맵 생성</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
+                                    <div>
+                                        <h4 class="font-semibold">Navigation Stack</h4>
+                                        <p class="text-gray-600 text-sm">목표점 설정 후 자동 경로 계획 및 주행</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</div>
+                                    <div>
+                                        <h4 class="font-semibold">장애물 회피</h4>
+                                        <p class="text-gray-600 text-sm">실시간 장애물 감지 및 회피 주행</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <img src="./ROS2_pre_installed_SD_files/agv_slam_2.png" alt="ROS2 로봇팔 시뮬레이션 화면" class="w-full rounded-xl shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Specs -->
+    <section class="section-padding bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">⚙️ 기술 사양 및 구성품</h2>
+                <p class="text-xl text-gray-600">라즈베리파이 4에 최적화된 완벽한 ROS2 환경</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-lg" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-6">📦 구성품</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-microchip text-blue-500"></i>
+                            <span>ROS2 Humble + Ubuntu 22.04 LTS 사전설치 SD카드</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-desktop text-blue-500"></i>
+                            <span>XFCE 경량 데스크톱 환경</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-code text-blue-500"></i>
+                            <span>ROS2 기본과정 예제 코드 모음</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-robot text-blue-500"></i>
+                            <span>2바퀴로봇 + 5축로봇암 제어 코드</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-car text-blue-500"></i>
+                            <span>자율주행로봇 SLAM 패키지(개발중)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-book text-blue-500"></i>
+                            <span>사용 매뉴얼 링크 제공</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="text-2xl font-bold text-green-600 mb-6">🛠️ 기술 사양</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <span class="font-semibold">운영체제</span>
+                            <span>Ubuntu 22.04 LTS (64bit)</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <span class="font-semibold">ROS 버전</span>
+                            <span>ROS2 Humble Hawksbill</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <span class="font-semibold">데스크톱 환경</span>
+                            <span>XFCE (경량 최적화)</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <span class="font-semibold">SD카드 용량</span>
+                            <span>32GB (고속 Class 10)</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <span class="font-semibold">호환 모델</span>
+                            <span>라즈베리파이 4만 호환</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">추가 패키지</span>
+                            <span>OpenCV, Navigation2, rViz</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Customers -->
+    <section class="section-padding bg-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">🎯 이런 분들께 추천합니다</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="text-5xl mb-4">🎓</div>
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">로보틱스 입문자</h3>
+                    <p class="text-gray-600 mb-4">ROS2 학습을 하고 싶은데 설치 및 셋팅이 어려운 분들</p>
+                    <div class="text-green-600 font-semibold">→ 복잡한 설정 없이 바로 학습 시작!</div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="text-5xl mb-4">🏫</div>
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">대학생 / 졸업작품</h3>
+                    <p class="text-gray-600 mb-4">졸업작품으로 라즈베리파이 기반 ROS2 로봇을 만들려는 학생</p>
+                    <div class="text-green-600 font-semibold">→ 검증된 환경으로 프로젝트 완성!</div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">아두이노 → ROS2 메이커</h3>
+                    <p class="text-gray-600 mb-4">아두이노에서 ROS2로 수준을 높이고 싶은 메이커</p>
+                    <div class="text-green-600 font-semibold">→ 단계별 학습으로 레벨업!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="section-padding bg-white" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">💬 고객 리뷰</h2>
+                <p class="text-xl text-gray-600">실제 사용자들의 생생한 후기</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-yellow-50 p-6 rounded-xl shadow-md">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                    </div>
+                    <p class="text-gray-700 mb-4">"사전 설치가 되어 있어서 정말 편하네요! 기초과정을 학습하고 나니 ROS2 노드 소스코드가 읽혀집니다!"</p>
+                    <div class="text-sm text-gray-600">박○○님 (LG전자)</div>
+                </div>
+                
+                <div class="bg-yellow-50 p-6 rounded-xl shadow-md">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                    </div>
+                    <p class="text-gray-700 mb-4">"프로젝트준비 시간이 많이 단축되었어요. 한반이 6명으로 셋팅에 시간이 많이 걸릴 것으로 걱정했는데, 바로 실습부터 시작할 수 있어서 좋습니다"</p>
+                    <div class="text-sm text-gray-600">김○○ 학습자 (KG-KAIROS 4기)</div>
+                </div>
+                
+                <div class="bg-yellow-50 p-6 rounded-xl shadow-md">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                    </div>
+                    <p class="text-gray-700 mb-4">"포함된 ROS2 기본 과정이 쉽고 단계적으로 제작이 되어서 ROS2 공부하기에 최적입니다. "</p>
+                    <div class="text-sm text-gray-600">정○○님 (로봇 강사)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section-padding bg-gradient-to-br from-purple-100 to-blue-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">💰 특별 할인가</h2>
+                <p class="text-xl text-gray-600">지금 주문하면 최대 40% 할인!</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden price-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <div class="bg-gradient-to-r from-red-500 to-red-600 text-white text-center py-4">
+                        <div class="text-lg font-bold">🔥 론칭 기념 특가</div>
+                        <div class="text-sm">선착순 100명 한정</div>
+                    </div>
+                    
+                    <div class="p-8">
+                        <div class="text-center mb-8">
+                            <h3 class="text-3xl font-bold text-gray-800 mb-4">ROS2 완벽학습 SD카드</h3>
+                            <div class="flex items-center justify-center gap-4">
+                                <span class="text-4xl font-bold text-red-600">20,000원</span>
+                                <span class="text-2xl text-gray-500 line-through">35,000원</span>
+                                <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-bold">43% 할인</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <h4 class="font-bold text-lg mb-3">✅ 포함 내용</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• 32GB SD카드 (ROS2 + Ubuntu 사전설치)</li>
+                                    <li>• ROS2 기본학습 예제코드</li>
+                                    <li>• 2바퀴로봇 제어 패키지</li>
+                                    <li>• 5축로봇암 제어 패키지</li>
+                                    <li>• SLAM 자율주행 패키지</li>
+                                    <li>• 상세 사용매뉴얼 링크</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-3">🎁 특별혜택</h4>
+                                <ul class="space-y-2 text-sm text-green-600">
+                                    <li>• 전국 무료배송</li>
+                                    <li>• 7일 무조건 환불보장</li>
+                                    <li>• 평생 무료 업데이트</li>
+                                    <li>• 온라인 커뮤니티 이용권</li>
+                                    <li>• 기술지원 3개월 무료</li>
+                                    <li>• 미니 방열판 무료증정</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="https://smartstore.naver.com/jd_edu/products/11136144480" class="bg-red-600 hover:bg-red-700 text-white text-xl px-12 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg inline-block mb-4">
+                                🛒 네이버 스마트스토어에서 주문하기
+                            </a>
+                            <div class="text-sm text-gray-600">
+                                <div>📦 배송: 주문 후 2-3일 (영업일 기준), 준비 및 테스트로 시간이 좀 걸립니다. </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Alternative Product -->
+            <div class="mt-8 text-center">
+                <p class="text-gray-600 mb-4 text-xl font-medium">ROS2 학습에 사용되는 하드웨어 키트는 별도로 구매하실 수 있습니다. 5축로봇암, 2바퀴로봇, 자율주행차 등이 있습니다. </p>
+                <a href="https://smartstore.naver.com/jd_edu" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-colors inline-block">
+                    🚀 ROS2 학습용 키트 구매하러가기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Updates -->
+    <section class="section-padding bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">🔮 지속적인 업데이트</h2>
+                <p class="text-xl text-gray-300">한 번 구매로 계속 확장되는 학습 콘텐츠</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-gray-800 p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-2">6축 로봇암</h3>
+                    <p class="text-gray-300 text-sm">더 정밀한 로봇암 제어 학습</p>
+                    <div class="text-yellow-400 text-sm mt-2">업데이트 예정</div>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-2">LLM 제어 로봇</h3>
+                    <p class="text-gray-300 text-sm">AI 음성명령으로 로봇 제어</p>
+                    <div class="text-yellow-400 text-sm mt-2">업데이트 예정</div>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-4">🚁</div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-2">드론 제어</h3>
+                    <p class="text-gray-300 text-sm">ROS2 기반 드론 자율비행</p>
+                    <div class="text-yellow-400 text-sm mt-2">업데이트 예정</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding bg-white" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">❓ 자주 묻는 질문</h2>
+            </div>
+            
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Q: 라즈베리파이 없이 SD카드만 사도 되나요?</h3>
+                    <p class="text-gray-600">A: 네, SD카드만 구매하셔도 됩니다. 라즈베리파이 4는 별도로 구매하시면 됩니다. 라즈베리파이 5는 호환되지 않습니다.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Q: 윈도우에서도 사용할 수 있나요?</h3>
+                    <p class="text-gray-600">A: 이 제품은 라즈베리파이 전용입니다. 하지만 기존 PC는 그대로 두고 별도로 사용하실 수 있어 안전합니다.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Q: 초보자도 사용할 수 있나요?</h3>
+                    <p class="text-gray-600">A: 네! 초보자를 위한 상세한 가이드와 기초부터 시작하는 예제 코드가 포함되어 있습니다.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Q: 로봇 하드웨어도 함께 판매하나요?</h3>
+                    <p class="text-gray-600">A: SD카드는 소프트웨어만 포함되어 있고, 로봇 하드웨어는 별도 구매하셔야 합니다. 추천 하드웨어 링크를 제공해드립니다.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Q: 업데이트는 어떻게 받나요?</h3>
+                    <p class="text-gray-600">A: 구매 후 이메일을 등록해 주시면, 새로운 로봇 패키지가 추가될 때마다 자동으로 알림을 드립니다.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Q: 기술지원을 받을 수 있나요?</h3>
+                    <p class="text-gray-600">A: 네, 이메일로 기술지원을 해 드립니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ROS2 SD카드</h3>
+                    <p class="text-gray-300 mb-4">가장 쉽게 시작하는 ROS2 학습 환경</p>
+                    <div class="flex space-x-4">
+                        <i class="fab fa-facebook-f text-gray-400 hover:text-blue-400 cursor-pointer"></i>
+                        <i class="fab fa-twitter text-gray-400 hover:text-blue-400 cursor-pointer"></i>
+                        <i class="fab fa-youtube text-gray-400 hover:text-red-400 cursor-pointer"></i>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">구매 정보</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="https://smartstore.naver.com/jd_edu/products/11136144480" class="hover:text-white">네이버 스마트스토어</a></li>
+                        <li>이메일: jdedu.kr@gmail.com</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">고객 지원</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>배송비: 전국 3000원</li>
+                        <li>배송기간: 2-3일 (영업일 기준)</li>
+                        <li>교환/환불: 7일 이내</li>
+                        <li>기술지원: 이메일</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 JD Edu. All rights reserved. </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating CTA Button -->
+    <div class="floating-cta">
+        <a href="https://smartstore.naver.com/jd_edu" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-bold shadow-lg transition-all duration-300 transform hover:scale-105">
+            🛒 바로 주문하기
+        </a>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const distance = tomorrow.getTime() - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                String(hours).padStart(2, '0') + ":" + 
+                String(minutes).padStart(2, '0') + ":" + 
+                String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "00:00:00";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.price-card, .bg-white').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+
+
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDoIzFOh9f2HKNqEUfnhPyzSiCbUXpxRb81pKib3pNxWqY1q7sNJX7Y6niu8s5g8OJXqtluOQJR9HY2AWyLjT%2FEBju%2BwyZkk5DkXuxoObG4y9Ai1UKefclWxJFHs%2BhmO1XB%2BkpiGlfFPws14P8%2FzHZSY0Ww8IuQNkPpZF%2BkwsogFcENhOfVnWAVuQhYNkJW5otwXyaJ%2BICe9LVdzVR%2BBjAzRKqwBOskb5yiVtNSeKlOGTK1qi%2FjePM4Bf4J%2F7gdqQ%2FiplrJV1METOB5f6KZUUOTE%2FV1kzcIEQQlOoggGa34%2BtiMol8Jnrrvns279L2HvpNMtpbEIJQoW0eZ6X25XCnsraCzJPEyMQe1W84o6180okuZULNsxnwHKMnp2ccZbgwh3mL%2FRa8mfUHOj3OBxudLUfdUs8WICoqilp0Cu23%2B5ONpfNEYZMo7NJ%2FSEru1iQvG%2FdIefnL0LWw9dxNPKgPWo1byEdLVNd9Vf1mj3A%2BBNByjEJM2x7o1MYSxCGZe2OF6LqhJ4YCOvZUSW4eC5aIYc%3D";
+        window.__genspark_locale = "ko-KR";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDoIzFOh9f2HKNqEUfnhPyzSiCbUXpxRb81pKib3pNxWqY1q7sNJX7Y6niu8s5g8OJXqtluOQJR9HY2AWyLjT/EBju+wyZkk5DkXuxoObG4y9Ai1UKefclWxJFHs+hmO1XB+kpiGlfFPws14P8/zHZSY0Ww8IuQNkPpZF+kwsogFcENhOfVnWAVuQhYNkJW5otwXyaJ+ICe9LVdzVR+BjAzRKqwBOskb5yiVtNSeKlOGTK1qi/jePM4Bf4J/7gdqQ/iplrJV1METOB5f6KZUUOTE/V1kzcIEQQlOoggGa34+tiMol8Jnrrvns279L2HvpNMtpbEIJQoW0eZ6X25XCnsraCzJPEyMQe1W84o6180okuZULNsxnwHKMnp2ccZbgwh3mL/Ra8mfUHOj3OBxudLUfdUs8WICoqilp0Cu23+5ONpfNEYZMo7NJ/SEru1iQvG/dIefnL0LWw9dxNPKgPWo1byEdLVNd9Vf1mj3A+BNByjEJM2x7o1MYSxCGZe2OF6LqhJ4YCOvZUSW4eC5aIYc=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="./ROS2_pre_installed_SD_files/notice_dialog.js.다운로드"></script>
+    </body></html>
